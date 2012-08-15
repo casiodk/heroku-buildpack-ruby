@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
+system "echo 'ARGS: #{ARGV.join(',')} LANG:#{LanguagePack.detect(ARGV[0], ARGV[1])}'"
+
 # vendor awesome-vm
-system 'mkdir -p $1/vendor/libsndfile'
-system 'curl https://s3.amazonaws.com/libsndfile/0bd165e3-3fee-436c-b210-334e97c7940f.gz -o - | tar -xz -C $1/vendor/libsndfile -f -'
+system "mkdir -p #{ARGV[0]}/vendor/libsndfile"
+system "curl https://s3.amazonaws.com/libsndfile/0bd165e3-3fee-436c-b210-334e97c7940f.gz -o - | tar -xz -C #{ARGV[0]}/vendor/libsndfile -f -"
 
 # sync output
 $stdout.sync = true
