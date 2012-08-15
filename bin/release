@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+ENV['PATH'] = "vendor/libsndfile/bin:#{ENV['PATH']}"
 
 $:.unshift File.expand_path("../../lib", __FILE__)
 require "language_pack"
