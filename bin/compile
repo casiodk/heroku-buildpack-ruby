@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-system "echo 'ARGS: #{ARGV.join(',')} LANG:#{LanguagePack.detect(ARGV[0], ARGV[1])}'"
+system "echo 'ARGS: #{ARGV.join(',')}'"
 
 # vendor awesome-vm
 system "mkdir -p #{ARGV[0]}/vendor/libsndfile"
