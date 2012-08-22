@@ -101,7 +101,7 @@ end
 
 desc "install libyaml"
 task "libyaml:install", :version do |t, args|
-  version = args[:version]
+  version = '0.1.4'#args[:version]
   name = "libyaml-#{version}"
   Dir.mktmpdir("libyaml-") do |tmpdir|
     Dir.chdir(tmpdir) do |dir|
@@ -124,14 +124,16 @@ end
 desc "install node"
 task "node:install", :version do |t, args|
   version = args[:version]
-  name    = "node-#{version}"
-  prefix  = "/app/vendor/node-v#{version}"
+  #name    = "node-#{version}"
+  name    = "node-0.4.7"
+  #prefix  = "/app/vendor/node-v#{version}"
+  prefix  = "/app/vendor/node-v0.8.7"
   Dir.mktmpdir("node-") do |tmpdir|
     Dir.chdir(tmpdir) do |dir|
       FileUtils.rm_rf("#{tmpdir}/*")
 
-      sh "curl http://nodejs.org/dist/node-v#{version}.tar.gz -s -o - | tar vzxf -"
-
+      #sh "curl http://nodejs.org/dist/node-v#{version}.tar.gz -s -o - | tar vzxf -"
+      sh "curl http://nodejs.org/dist/node-v0.4.7.tar.gz -s -o - | tar vzxf -"
       build_command = [
         "./configure --prefix #{prefix}",
         "make install",
@@ -142,7 +144,8 @@ task "node:install", :version do |t, args|
         "rm -rf #{prefix}/bin"
       ].join(" && ")
 
-      sh "vulcan build -v -o #{name}.tgz --source node-v#{version} --command=\"#{build_command}\""
+      #sh "vulcan build -v -o #{name}.tgz --source node-v#{version} --command=\"#{build_command}\""
+      sh "vulcan build -v -o #{name}.tgz --source node-v0.4.7 --command=\"#{build_command}\""
       s3_upload(tmpdir, name)
     end
   end
